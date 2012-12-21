@@ -32,7 +32,7 @@ if (vcapServices) {
 app.configure(function(){
   app.set('port', port);
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
@@ -44,6 +44,10 @@ app.configure(function(){
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
+
+var ejs = require('ejs');
+ejs.open = '{{';
+ejs.close = '}}';
 
 app.get('/', routes.index);
 app.get('/users', user.list);
